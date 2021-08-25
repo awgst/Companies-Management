@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\CompanyController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('auth.login');
 });
+
+Route::resource('company', CompanyController::class);
 
 Auth::routes();
 
