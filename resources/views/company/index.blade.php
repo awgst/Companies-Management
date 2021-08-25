@@ -8,9 +8,9 @@
                 <div class="card-header">{{ __('Company') }}</div>
 
                 <div class="card-body">
-                    <div class="list-group">
+                    <div class="list-group mb-2">
                       @foreach($companies as $company)
-                      <a href="#" class="list-group-item list-group-item-action">
+                      <a href="#" class="list-group-item list-group-item-action mb-2">
                         <div class="d-flex">
                             <div class="logo" style="width: 100px;height: 100px"></div>
                             <div class="description">
@@ -22,6 +22,10 @@
                       </a>
                       @endforeach
                     </div>
+                    <div class="d-flex justify-content-end">
+                        {{ $companies->links() }}    
+                    </div>
+                    
                 </div>
             </div>
         </div>
