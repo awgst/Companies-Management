@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 use App\Models\User;
+use App\Models\Company;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,5 +20,8 @@ class DatabaseSeeder extends Seeder
         	'email'=>'admin@transisi.id',
         	'password'=>bcrypt('transisi')
         ]);
+
+        Company::factory(10)->create();
+
     }
 }
