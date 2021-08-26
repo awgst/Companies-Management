@@ -19,7 +19,7 @@ class CompanyController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -77,8 +77,8 @@ class CompanyController extends Controller
     {
         // Show company with employees
         // Lazy eager load
-        $employees = Company::find($company->id)->employees;
-        return view('company.show', ['company'=>$company, 'employees'=>$employees->load('company')]);
+        $employees = $company->employees()->paginate(5);
+        return view('company.show', ['company'=>$company, 'employees'=>$employees]);
     }
 
     /**
