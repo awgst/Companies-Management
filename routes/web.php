@@ -20,6 +20,7 @@ Route::get('/', function () {
 
 Route::resource('company', CompanyController::class);
 Route::resource('employee', EmployeeController::class);
+Route::get('employee/{company}/create', [EmployeeController::class, 'create']);
 
 Auth::routes();
 

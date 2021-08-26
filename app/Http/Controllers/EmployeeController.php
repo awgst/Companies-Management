@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\Company;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -24,9 +25,10 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Company $company)
     {
         //
+        return view('employee.create', compact('company'));
     }
 
     /**
@@ -38,6 +40,12 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'name'=>'required',
+            'email'=>'required|unique:employees|email:rfc,dns',
+        ]);
+        Employee::create($request->all());
+        return redirect('company/'.$request->company_id)->with('status', 'add_success');
     }
 
     /**

@@ -18,7 +18,7 @@
                         </small>
                     </div>
                     <div class="d-flex justify-content-end">
-                        <a href="{{ url('/employee/create') }}" class="btn btn-primary mx-2 mb-2">Tambah</a>
+                        <a href="{{ url('/employee/'.$company->id.'/create') }}" class="btn btn-primary mx-2 mb-2">Tambah</a>
                     </div>
                     <div class="list-group mb-2">
                       @foreach($employees as $employee)
@@ -44,4 +44,9 @@
         </div>
     </div>
 </div>
+@if(session('status')=='add_success')
+    <script>
+        alert('Data karyawan berhasil ditambah!');
+    </script>
+@endif
 @endsection
