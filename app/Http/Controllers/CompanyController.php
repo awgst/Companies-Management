@@ -44,7 +44,7 @@ class CompanyController extends Controller
             'name'=>'required',
             'email'=>'required|email:rfc,dns|unique:companies',
             'website'=>'required',
-            'logo'=>'required|max:2048|image|mimes:jpeg,jpg,png,svg|dimensions:min_width=100,min_height=100'
+            'logo'=>'required|max:2048|image|mimes:png|dimensions:min_width=100,min_height=100'
         ]);
         $fileName = date("Ymd").time().$request->file('logo')->getClientOriginalName();
         $pathFile = $request->file('logo')->storeAs('company', $fileName);

@@ -12,21 +12,42 @@
                         @csrf
                       <div class="mb-3">
                         <label for="inputName" class="form-label">Nama Company</label>
-                        <input type="text" class="form-control" placeholder="Nama Perusahaan" id="inputName" name="name">
+                        <input type="text" class="form-control @error('website') is-invalid @enderror" placeholder="Nama Perusahaan" id="inputName" name="name" required value="{{ old('name') }}">
+                        @error('name')
+                          <div class="text-danger">
+                              {{ $message }}
+                          </div>          
+                        @enderror
                       </div>
                       <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Alamat Email</label>
-                        <input type="text" class="form-control" placeholder="Email Perusahaan" id="exampleInputEmail1" name="email">
+                        <input type="email" class="form-control @error('website') is-invalid @enderror" placeholder="Email Perusahaan" id="exampleInputEmail1" name="email" required value="{{ old('email') }}">
+                        @error('email')
+                          <div class="text-danger">
+                              {{ $message }}
+                          </div>         
+                        @enderror
                       </div>
                       <div class="mb-3">
                         <label for="inputWebsite" class="form-label">Website</label>
-                        <input type="text" class="form-control" placeholder="Website Perusahaan" id="inputWebsite" name="website">
+                        <input type="text" class="form-control @error('website') is-invalid @enderror" placeholder="Website Perusahaan" id="inputWebsite" name="website" required value="{{ old('website') }}">
+                        @error('website')
+                          <div class="text-danger">
+                              {{ $message }}
+                          </div>                  
+                        @enderror
                       </div>
                       <div class="mb-3">
                         <div class="d-flex justify-content-between">
                             <div class="d-flex flex-column w-100 my-auto">
                                 <label for="inputLogo" class="form-label">Logo</label>
-                                <input type="file" class="form-" id="inputLogo" name="logo">    
+                                <input type="file" class="form-" id="inputLogo" name="logo" accept="image/png" required>
+                                <label class="text-muted">Ukuran maksimal 2 MB. Minimal 100x100px</label>
+                                @error('logo')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>         
+                                @enderror    
                             </div>    
                             <div class="img-upload" style="max-width: 150px; max-height: 150px;">
                                 <img src="" class="w-100 h-100" id="img-box">    
