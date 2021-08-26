@@ -48,7 +48,10 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        //
+        // Show company with employees
+        // Lazy eager load
+        $employees = Company::find($company->id)->employees;
+        return view('company.show', ['company'=>$company, 'employees'=>$employees->load('company')]);
     }
 
     /**
