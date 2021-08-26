@@ -52,4 +52,9 @@
     alert('Berhasil hapus data!');
 </script>
 @endif
+@if(session('status')=='updated')
+<script>
+    alert('Berhasil edit data!');
+</script>
+@endif
 @endsection

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
+
 
 class CompanyController extends Controller
 {
@@ -43,7 +45,7 @@ class CompanyController extends Controller
         $request->validate([
             'name'=>'required',
             'email'=>'required|email:rfc,dns|unique:companies',
-            'website'=>'required',
+            'website'=>'required|url',
             'logo'=>'required|max:2048|image|mimes:png|dimensions:min_width=100,min_height=100'
         ]);
         $fileName = date("Ymd").time().$request->file('logo')->getClientOriginalName();
@@ -78,6 +80,7 @@ class CompanyController extends Controller
     public function edit(Company $company)
     {
         //
+        return view('company.edit', compact('company'));
     }
 
     /**
@@ -90,6 +93,23 @@ class CompanyController extends Controller
     public function update(Request $request, Company $company)
     {
         //
+        $request->validate([
+            'name'=>'required',
+            'email'=>['required', Rule::unique('companies')->ignore($company->id), 'email:rfc,dns'],
+            'website'=>'required|url',
+            'logo'=>'max:2048|image|mimes:png|dimensions:min_width=100,min_height=100'
+        ]);
+
+        $data = collect($request->except(['_token', '_method']));
+        if($request->file('logo')){
+            Storage::delete(str_replace('storage/app/', '', $company->logo));
+            $fileName = date("Ymd").time().$request->file('logo')->getClientOriginalName();
+            $pathFile = $request->file('logo')->storeAs('company', $fileName);
+            $logo = 'storage/app/'.$pathFile;
+            $data['logo'] = $logo;
+        }
+        Company::find($company->id)->update($data->all());
+        return redirect('/company')->with('status', 'updated');
     }
 
     /**
