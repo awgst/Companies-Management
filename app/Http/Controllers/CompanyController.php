@@ -54,7 +54,7 @@ class CompanyController extends Controller
         //
         $request->validate([
             'name'=>'required',
-            'email'=>'required|email|unique:companies',
+            'email'=>'required|email:rfc,dns|unique:companies',
             'website'=>'required|url',
             'logo'=>'required|max:2048|image|mimes:png|dimensions:min_width=100,min_height=100'
         ]);
@@ -105,7 +105,7 @@ class CompanyController extends Controller
         //
         $request->validate([
             'name'=>'required',
-            'email'=>['required', Rule::unique('companies')->ignore($company->id), 'email'],
+            'email'=>['required', Rule::unique('companies')->ignore($company->id), 'email:rfc,dns'],
             'website'=>'required|url',
             'logo'=>'max:2048|image|mimes:png|dimensions:min_width=100,min_height=100'
         ]);

@@ -53,7 +53,7 @@ class EmployeeController extends Controller
         //
         $request->validate([
             'name'=>'required',
-            'email'=>'required|unique:employees|email',
+            'email'=>'required|unique:employees|email:rfc,dns',
         ]);
         Employee::create($request->all());
         return redirect('company/'.$request->company_id)->with('status', 'add_success');
@@ -95,7 +95,7 @@ class EmployeeController extends Controller
         //
         $request->validate([
             'name'=>'required',
-            'email'=>['required', Rule::unique('employees')->ignore($employee->id), 'email'],
+            'email'=>['required', Rule::unique('employees')->ignore($employee->id), 'email:rfc,dns'],
         ]);
         Employee::find($employee->id)->update($request->except(['_method', '_token']));
         return redirect('employee/'.$employee->id.'/edit')->with('status', 'employee_edited');
