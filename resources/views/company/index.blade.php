@@ -52,6 +52,11 @@
     alert('Berhasil hapus data!');
 </script>
 @endif
+@if(session('status')=='employee_deleted')
+<script>
+    alert('Berhasil hapus data karyawan!');
+</script>
+@endif
 @if(session('status')=='updated')
 <script>
     alert('Berhasil edit data!');
