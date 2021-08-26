@@ -27,6 +27,7 @@ class CompanyController extends Controller
     public function create()
     {
         //
+        return view('company.create');
     }
 
     /**
@@ -38,6 +39,19 @@ class CompanyController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'name'=>'required',
+            'email'=>'required|email:rfc,dns|unique:companies',
+            'website'=>'required',
+            'logo'=>'required|max:2048|image|mimes:jpeg,jpg,png,svg|dimensions:min_width=100,min_height=100'
+        ]);
+        $fileName = date("Ymd").time().$request->file('logo')->getClientOriginalName();
+        $pathFile = $request->file('logo')->storeAs('company', $fileName);
+        $logo = 'storage/app/'.$pathFile;
+        $company = new Company($request->all());
+        $company->logo = $logo;
+        $company->save();
+        return redirect('company/create')->with('status', 'success');
     }
 
     /**

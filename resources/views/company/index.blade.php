@@ -16,7 +16,7 @@
                       <div class="list-group-item list-group-item-action mb-2">
                         <div class="d-flex">
                             <div class="logo" style="width: 100px;height: 100px">
-                                <img class="img-fluid" src="{{ url($company->logo) }}"></img>
+                                <img class="w-100 h-100" src="{{ url($company->logo) }}"></img>
                             </div>
                             <div class="description w-100 mx-3">
                                 <div class="d-flex w-100 justify-content-between">
