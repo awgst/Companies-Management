@@ -85,6 +85,11 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        //
+        // Delete data from database
+        $delete = Company::find($company->id);
+        // Delete all employees from company
+        $delete->employees()->delete();
+        $delete->delete();
+        return redirect('/company')->with('status', 'deleted');
     }
 }

@@ -21,9 +21,13 @@
                             <div class="description w-100 mx-3">
                                 <div class="d-flex w-100 justify-content-between">
                                   <a href="{{ url('company/'.$company->id) }}" class="text-decoration-none text-dark"><h5 class="mb-1">{{ $company->name }}</h5></a>
-                                  <small>
-                                    <a href="{{ url('company/'.$company->id.'/edit') }}" class="btn btn-success">Edit</a>
-                                    <button class="btn btn-danger">Hapus</button>
+                                  <small class="d-flex">
+                                    <a href="{{ url('company/'.$company->id.'/edit') }}" class="btn btn-success mx-1">Edit</a>
+                                    <form action="{{ url('/company/'.$company->id)  }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger mx-1">Hapus</button>
+                                    </form>
                                   </small>
                                 </div>
                                 <h5 class="mb-1"></h5>
@@ -43,4 +47,9 @@
         </div>
     </div>
 </div>
+@if(session('status')=='deleted')
+<script>
+    alert('Berhasil hapus data!');
+</script>
+@endif
 @endsection
