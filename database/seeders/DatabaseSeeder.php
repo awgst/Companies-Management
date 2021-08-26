@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 use App\Models\User;
 use App\Models\Company;
+use App\Models\Employee;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,8 +21,10 @@ class DatabaseSeeder extends Seeder
         	'email'=>'admin@transisi.id',
         	'password'=>bcrypt('transisi')
         ]);
-
-        Company::factory(10)->create();
+        // Create company with random employee count
+        $companies = Company::factory(10)
+        ->has(Employee::factory()->count(mt_rand(2,10)))
+        ->create();
 
     }
 }
