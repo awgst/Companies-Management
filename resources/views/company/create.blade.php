@@ -31,6 +31,7 @@
                       <div class="mb-3">
                         <label for="inputWebsite" class="form-label">Website</label>
                         <input type="text" class="form-control @error('website') is-invalid @enderror" placeholder="Website Perusahaan" id="inputWebsite" name="website" required value="{{ old('website') }}">
+                        <label class="text-muted">Masukkan URL Website yang valid. Contoh : 'http://google.com'</label>
                         @error('website')
                           <div class="text-danger">
                               {{ $message }}
