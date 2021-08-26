@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use App\Models\Company;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class EmployeeController extends Controller
 {
@@ -42,7 +43,7 @@ class EmployeeController extends Controller
         //
         $request->validate([
             'name'=>'required',
-            'email'=>'required|unique:employees|email:rfc,dns',
+            'email'=>'required|unique:employees|email',
         ]);
         Employee::create($request->all());
         return redirect('company/'.$request->company_id)->with('status', 'add_success');
@@ -69,6 +70,7 @@ class EmployeeController extends Controller
     public function edit(Employee $employee)
     {
         //
+        return view('employee.edit', ['employee' => $employee->load('company')]);
     }
 
     /**
@@ -81,6 +83,12 @@ class EmployeeController extends Controller
     public function update(Request $request, Employee $employee)
     {
         //
+        $request->validate([
+            'name'=>'required',
+            'email'=>['required', Rule::unique('employees')->ignore($employee->id), 'email'],
+        ]);
+        Employee::find($employee->id)->update($request->except(['_method', '_token']));
+        return redirect('employee/'.$employee->id.'/edit')->with('status', 'employee_edited');
     }
 
     /**
