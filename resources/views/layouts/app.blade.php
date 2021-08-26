@@ -53,10 +53,10 @@
                             @endif
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('company') }}">{{ __('Company') }}</a>
+                                <a class="nav-link {{ request()->is('company') ? 'active' : '' }}" href="{{ url('company') }}">{{ __('Company') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('employee') }}">{{ __('Employee') }}</a>
+                                <a class="nav-link {{ request()->is('employee') ? 'active' : '' }}" href="{{ url('employee') }}">{{ __('Employee') }}</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

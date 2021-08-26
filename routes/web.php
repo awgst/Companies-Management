@@ -16,7 +16,7 @@ use App\Http\Controllers\EmployeeController;
 
 Route::get('/', function () {
     return view('auth.login');
-});
+})->middleware('guest');
 
 Route::resource('company', CompanyController::class);
 Route::resource('employee', EmployeeController::class);
@@ -40,4 +40,4 @@ Route::get('storage/app/company/{filename}', function ($filename)
     $response->header("Content-Type", $type);
  
     return $response;
-});
+})->middleware('auth');
