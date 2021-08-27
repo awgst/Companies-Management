@@ -1,7 +1,7 @@
 # Laravel Dasar
 Website untuk mengelola data company dan employee menggunakan laravel.\
-Project menggunakan laravel/ui packages untuk tampilan dasar.\
-Jalankan perintah berikut apabila tampilan bootrap tidak muncul\
+Project menggunakan laravel/ui packages dengan bootstrap untuk tampilan dasar.\
+Jalankan perintah berikut apabila tampilan bootstrap tidak muncul\
 `npm install`\
 `npm run dev`\
 Project menggunakan Database seeder untuk mengisikan data kedalam database guna testing.\
